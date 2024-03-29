@@ -71,7 +71,7 @@ class GameOfLife:
                     messages = game_of_life.messages
                     current_ecosystem = ast.literal_eval(game_of_life.ecosystem)
                     evolutions = game_of_life.evolutions
-                    probability = messages / 100
+                    probability = messages * config.PROBABILITY_EVOLVE_PER_MESSAGE / 100
                     if random.random() < probability:
                         logger.info(msgs.EVOLUTION)
                         messages = 0

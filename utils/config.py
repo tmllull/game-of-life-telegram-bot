@@ -19,6 +19,7 @@ class Config:
             )
             self.ROWS = 5
             self.COLUMNS = 5
+            self.PROBABILITY_EVOLVE_PER_MESSAGE = 0.3  # 30%
             self.NEW_ECOSYSTEM_PROBABILITY = 0.9  # 20%
             self.ECOSYSTEM_PROBABILITY_DIE = 0.92  # 2%
             self.ORGANISM_PROBABILITY_DIE = 0.05  # 5%

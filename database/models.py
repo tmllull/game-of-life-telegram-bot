@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, UniqueConstraint
+from sqlalchemy import Column, Date, Integer, String, UniqueConstraint
 
 from .database import Base
 
@@ -14,12 +14,14 @@ class User(Base):
     __table_args__ = (UniqueConstraint("id"),)
 
 
-class GameOfLife(Base):
-    __tablename__ = "game_of_life"
+class Ecosystem(Base):
+    __tablename__ = "ecosystems"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     ecosystem = Column(String(255))
     evolutions = Column(Integer)
     messages = Column(Integer)
+    born_date = Column(Date)
+    extinction_date = Column(Date)
 
     __table_args__ = (UniqueConstraint("id"),)

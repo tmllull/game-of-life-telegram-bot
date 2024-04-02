@@ -1,5 +1,6 @@
 import random
 
+import utils.logger as logger
 from utils.config import Config
 
 config = Config()
@@ -11,7 +12,9 @@ class Organisms:
 
     def evolution(self, organism, evolutions):
         # Probability that organisms die
-        if random.random() < config.ORGANISM_PROBABILITY_DIE + evolutions / 1000:
+        current_probability_to_die = config.ORGANISM_PROBABILITY_DIE * evolutions
+        logger.info("Organism probability to die: " + str(current_probability_to_die))
+        if random.random() < current_probability_to_die:
             return " "
         return organism
 

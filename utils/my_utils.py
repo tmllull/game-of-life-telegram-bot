@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import telegram
@@ -51,3 +52,6 @@ class MyUtils:
                 text=msg,
                 parse_mode=telegram.constants.ParseMode.MARKDOWN_V2,
             )
+
+    def get_date(self) -> datetime.date:
+        return datetime.datetime.now().date()

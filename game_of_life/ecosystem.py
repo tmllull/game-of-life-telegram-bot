@@ -1,8 +1,8 @@
 import random
 
 import utils.logger as logger
+from game_of_life.organisms import Organisms
 from utils.config import Config
-from utils.organisms import Organisms
 
 organisms = Organisms()
 config = Config()
@@ -59,7 +59,8 @@ class Ecosystem:
         probability_to_die = config.ECOSYSTEM_PROBABILITY_DIE + evolutions / 1000
         logger.info("Probability that ecosystem die: " + str(probability_to_die))
         if random.random() < probability_to_die:
-            return new_generation
+            logger.info("Ecosystem died because of pandemic or something similar")
+            return new_generation, True
 
         for i in range(rows):  # Ecosystem evolution
             for j in range(columns):
@@ -93,7 +94,7 @@ class Ecosystem:
                         new_generation[i][j] = " "
 
         # Update the ecosystem
-        return new_generation
+        return new_generation, False
 
     def format_ecosystem(self, ecosystem):
         msg = ""

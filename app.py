@@ -1,9 +1,9 @@
 from database import models
 from database.database import engine
+from game_of_life.game_of_life import GameOfLife
 from telegram import Update
 from telegram.ext import Application, ApplicationBuilder, ContextTypes, MessageHandler
 from utils.config import Config
-from utils.game_of_life import GameOfLife
 
 gol = GameOfLife()
 

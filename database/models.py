@@ -23,5 +23,7 @@ class Ecosystem(Base):
     messages = Column(Integer)
     born_date = Column(Date)
     extinction_date = Column(Date)
+    creator = Column(String(255))
+    killer = Column(String(255))
 
     __table_args__ = (UniqueConstraint("id"),)

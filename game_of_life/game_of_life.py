@@ -45,14 +45,6 @@ class GameOfLife:
                     db.query(models.User).filter(models.User.id == user_id).first()
                 )
                 ecosystems_db = db.query(func.count(models.Ecosystem.id)).scalar()
-                ecosystem_died = (
-                    db.query(models.Ecosystem)
-                    .filter(
-                        models.Ecosystem.born_date != None,
-                        models.Ecosystem.extinction_date != None,
-                    )
-                    .first()
-                )
                 ecosystem_alive = (
                     db.query(models.Ecosystem)
                     .filter(
@@ -61,9 +53,11 @@ class GameOfLife:
                     )
                     .first()
                 )
-                if ecosystem_died or ecosystems_db == 0:
+                if ecosystem_alive is None or ecosystems_db == 0:
+                    # logger.info("Creating ecosystem...")
                     # Check probability to create new ecosystem
                     if random.random() < config.NEW_ECOSYSTEM_PROBABILITY:
+                        logger.info("Creating new ecosystem...")
                         msg = msgs.ECOSYSTEM_CREATED + user_first_name
                         logger.info(msg)
                         new_ecosystem = ecosystem.new_ecosystem(username + str(message))
@@ -73,6 +67,7 @@ class GameOfLife:
                             messages=0,
                             evolutions=0,
                             born_date=utils.get_date(),
+                            creator=username,
                         )
                         update_user = models.User(
                             id=user_id,
@@ -87,13 +82,15 @@ class GameOfLife:
                             ecosystem.format_ecosystem(new_ecosystem)
                         )
                 else:
+                    # logger.info("Evolution...")
                     ecosystem_id = ecosystem_alive.id
                     messages = ecosystem_alive.messages
                     current_ecosystem = ast.literal_eval(ecosystem_alive.ecosystem)
                     evolutions = ecosystem_alive.evolutions
                     probability = messages * config.PROBABILITY_PER_MESSAGE
-                    logger.info("Probability: " + str(probability))
+                    # logger.info("Probability: " + str(probability))
                     if random.random() < probability:
+                        # logger.info("Evolution...")
                         logger.info(msgs.EVOLUTION)
                         new_ecosystem, died_by_epidemic = ecosystem.evolution(
                             current_ecosystem, evolutions
@@ -116,6 +113,7 @@ class GameOfLife:
                                 id=ecosystem_id,
                                 messages=messages + 1,
                                 extinction_date=utils.get_date(),
+                                killer=username,
                             )
                             db.merge(died_ecosystem)
                             # db.commit()
@@ -154,9 +152,11 @@ class GameOfLife:
                             messages=messages + 1,
                         )
                         db.merge(ecosystem_alive)
-                        # db.commit()
+                    # db.commit()
                 db.commit()
                 db.close()
             except Exception as e:
                 db.close()
                 logger.error(e)
+        else:
+            logger.info("Invalid chat")

@@ -5,6 +5,8 @@ from game_of_life.organisms import Organisms
 from utils.config import Config
 
 organisms = Organisms()
+flora = organisms.Flora()
+fauna = organisms.Fauna()
 config = Config()
 
 
@@ -20,8 +22,8 @@ class Ecosystem:
             random.seed(seed)
         rows = config.ROWS
         columns = config.COLUMNS
-        flora_list = organisms.flora()
-        fauna_list = organisms.fauna()
+        flora_list = flora.get_flora()
+        fauna_list = fauna.get_fauna()
         ecosystem = [[" " for _ in range(columns)] for _ in range(rows)]
 
         # Puts up to three flora organisms
@@ -73,8 +75,8 @@ class Ecosystem:
                         x = (i + dx) % rows
                         y = (j + dy) % columns
                         if (
-                            ecosystem[x][y] in organisms.flora()
-                            or ecosystem[x][y] in organisms.fauna()
+                            ecosystem[x][y] in flora.get_flora()
+                            or ecosystem[x][y] in fauna.get_fauna()
                         ):
                             neighbors_alive += 1
 
@@ -87,7 +89,7 @@ class Ecosystem:
                         )  # Stay (if not die on evolution)
                 else:  # Empty cell. Check if it should be born
                     if neighbors_alive == 3:  # New organism born
-                        all_organisms = organisms.flora() + organisms.fauna()
+                        all_organisms = flora.get_flora() + fauna.get_fauna()
                         organism = random.choice(all_organisms)
                         new_generation[i][j] = organism
                     else:  # Stay empty

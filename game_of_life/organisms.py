@@ -18,8 +18,16 @@ class Organisms:
             return " "
         return organism
 
-    def flora(self):
-        return ["🌱", "🌳", "🌻", "🍄", "🌹", "🍀"]
+    class Flora:
+        def __init__(self):
+            pass
 
-    def fauna(self):
-        return ["🐇", "🐦", "🐍", "🦠", "🐜", "🦋"]
+        def get_flora(self):
+            return ["🌱", "🌳", "🌻", "🍄", "🌹", "🍀"]
+
+    class Fauna:
+        def __init__(self):
+            pass
+
+        def get_fauna(self):
+            return ["🐇", "🐦", "🐍", "🦠", "🐜", "🦋"]

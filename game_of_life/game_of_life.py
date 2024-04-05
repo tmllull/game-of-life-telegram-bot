@@ -88,7 +88,7 @@ class GameOfLife:
                     current_ecosystem = ast.literal_eval(ecosystem_alive.ecosystem)
                     evolutions = ecosystem_alive.evolutions
                     probability = messages * config.PROBABILITY_PER_MESSAGE
-                    # logger.info("Probability: " + str(probability))
+                    logger.info("Probability: " + str(probability))
                     if random.random() < probability:
                         # logger.info("Evolution...")
                         logger.info(msgs.EVOLUTION)

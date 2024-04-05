@@ -22,6 +22,7 @@ class Config:
             self.PROBABILITY_PER_MESSAGE = 0.01  # 1%
             self.NEW_ECOSYSTEM_PROBABILITY = 0.2  # 20%
             self.ECOSYSTEM_PROBABILITY_DIE = 0.02  # 2%
+            self.ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION = 1000  # 0.1%
             self.ORGANISM_PROBABILITY_DIE = 0.05  # 5%
 
         except Exception as e:

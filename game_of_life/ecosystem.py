@@ -57,8 +57,12 @@ class Ecosystem:
         new_generation = [[" " for _ in range(columns)] for _ in range(rows)]
 
         # Probability that ecosystem die by epidemic or something similar,
-        # based on basic probability and every evolution add 0.1%
-        probability_to_die = config.ECOSYSTEM_PROBABILITY_DIE + evolutions / 1000
+        # based on basic probability, and every evolution add 0.1% as the
+        #
+        probability_to_die = (
+            config.ECOSYSTEM_PROBABILITY_DIE
+            + evolutions / config.ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION
+        )
         logger.info("Probability that ecosystem die: " + str(probability_to_die))
         if random.random() < probability_to_die:
             logger.info("Ecosystem died because of pandemic or something similar")

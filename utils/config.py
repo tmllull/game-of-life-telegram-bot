@@ -24,6 +24,7 @@ class Config:
             self.ECOSYSTEM_PROBABILITY_DIE = 0.02  # 2%
             self.ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION = 1000  # 0.1%
             self.ORGANISM_PROBABILITY_DIE = 0.05  # 5%
+            self.ORGANISM_PROBABILITY_DIE_ELD_FRACTION = 1000  # 0.1%
 
         except Exception as e:
             exit(e)

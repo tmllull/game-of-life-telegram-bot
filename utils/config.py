@@ -17,6 +17,12 @@ class Config:
             self.TELEGRAM_ADMIN_CHAT_ID = config.get(
                 "TELEGRAM_ADMIN_CHAT_ID", os.environ.get("TELEGRAM_ADMIN_CHAT_ID")
             )
+            self.OPENAI_API_KEY = config.get(
+                "OPENAI_API_KEY", os.environ.get("OPENAI_API_KEY")
+            )
+            self.OPENAI_MODEL = config.get(
+                "OPENAI_MODEL", os.environ.get("OPENAI_MODEL")
+            )
             self.ROWS = 5
             self.COLUMNS = 5
             self.PROBABILITY_PER_MESSAGE = 0.01  # 1%

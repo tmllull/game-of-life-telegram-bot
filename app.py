@@ -1,11 +1,12 @@
+from clients.openai import OpenAI
 from database import models
 from database.database import engine
 from game_of_life.game_of_life import GameOfLife
-from telegram import Update
-from telegram.ext import Application, ApplicationBuilder, ContextTypes, MessageHandler
+from telegram.ext import Application, ApplicationBuilder, MessageHandler
 from utils.config import Config
 
-gol = GameOfLife()
+open_ai = OpenAI()
+gol = GameOfLife(open_ai)
 
 config = Config()
 models.Base.metadata.create_all(bind=engine)

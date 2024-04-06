@@ -19,7 +19,8 @@ ecosystem = Ecosystem()
 
 
 class GameOfLife:
-    def __init__(self):
+    def __init__(self, open_ai=None):
+        self._open_ai = open_ai
         pass
 
     async def check_evolution(self, update: Update, context: ContextTypes.DEFAULT_TYPE):

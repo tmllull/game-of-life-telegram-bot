@@ -20,8 +20,8 @@ ecosystem = Ecosystem()
 
 
 class GameOfLife:
-    def __init__(self, open_ai=None):
-        self._open_ai = open_ai
+    def __init__(self):
+        logger.info("Starting game of life...")
         pass
 
     async def check_evolution(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -85,7 +85,7 @@ class GameOfLife:
                             prompt=prompts.ECOSYSTEM_BORN,
                         )
                         await utils.send_message(
-                            ecosystem.format_ecosystem(msg=new_ecosystem)
+                            ecosystem.format_ecosystem(new_ecosystem)
                         )
                 else:
                     # logger.info("Evolution...")
@@ -96,7 +96,7 @@ class GameOfLife:
                     probability = messages * config.PROBABILITY_PER_MESSAGE
                     logger.info("Probability: " + str(probability))
                     if random.random() < probability:
-                        logger.info(msgs.EVOLUTION)
+                        logger.info("Ecosystem evolving...")
                         new_ecosystem, died_by_epidemic = ecosystem.evolution(
                             current_ecosystem, evolutions
                         )
@@ -107,8 +107,10 @@ class GameOfLife:
                         )
                         if ecosystem_died:
                             msg = msgs.ECOSYSTEM_DIED
+                            prompt = prompts.ECOSYSTEM_DIE
                             if died_by_epidemic:
                                 msg = msgs.EPIDEMIC
+                                prompt = prompts.ECOSYSTEM_DIE_EPIDEMIC
                             logger.info(msg)
                             update_user = models.User(
                                 id=user_id,
@@ -124,7 +126,11 @@ class GameOfLife:
                             # db.commit()
                             db.merge(update_user)
                             # db.commit()
-                            await utils.send_message(msg)
+                            await utils.send_message(
+                                msg,
+                                pre_prompt=prompts.INSTRUCTION,
+                                prompt=prompt,
+                            )
                             await utils.send_message(
                                 ecosystem.format_ecosystem(ecosystem.died_ecosystem())
                             )
@@ -146,7 +152,11 @@ class GameOfLife:
                             # db.commit()
                             db.merge(update_user)
                             # db.commit()
-                            await utils.send_message(msg)
+                            await utils.send_message(
+                                msg,
+                                pre_prompt=prompts.INSTRUCTION,
+                                prompt=prompts.ECOSYSTEM_EVOLUTION,
+                            )
                             await utils.send_message(
                                 ecosystem.format_ecosystem(new_ecosystem)
                             )

@@ -3,10 +3,11 @@ import json
 import utils.logger as logger
 from openai import OpenAI
 from utils.config import Config
-from utils.my_utils import MyUtils
+
+# from utils.my_utils import MyUtils
 
 config = Config()
-utils = MyUtils()
+# utils = MyUtils()
 
 
 class OpenAI:
@@ -23,7 +24,6 @@ class OpenAI:
             {"role": "system", "content": pre_prompt},
             {"role": "user", "content": prompt},
         ]
-        logger.info(utils.num_tokens_from_messages(messages, config.OPENAI_MODEL))
         return {}
         response = self._client.chat.completions.create(
             model=config.OPENAI_MODEL,

@@ -13,7 +13,7 @@ class Organisms:
     def evolution(self, organism, evolutions):
         # Probability that organisms die
         current_probability_to_die = config.ORGANISM_PROBABILITY_DIE * evolutions
-        logger.info("Organism probability to die: " + str(current_probability_to_die))
+        # logger.info("Organism probability to die: " + str(current_probability_to_die))
         if random.random() < current_probability_to_die:
             return " "
         return organism

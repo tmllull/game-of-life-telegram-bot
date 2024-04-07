@@ -1,0 +1,7 @@
+INSTRUCTION = "Tu función es narrar la siguiente situación sobre un ecosistema como máximo en 1 línea."
+ECOSYSTEM_EVOLUTION = "El ecosistema acaba de evolucionar."
+ECOSYSTEM_BORN = "Se ha creado un nuevo ecosistema."
+ECOSYSTEM_DIE = "El ecosistema (no tengas en cuenta la especie humana) ha muerto por falta o exceso de población."
+ECOSYSTEM_DIE_EPIDEMIC = "El ecosistema ha muerto debido a una epidemia o catastrofe natural. Haz referencia a la causa de la extinción."
+ONE_ORGANISM_DIE = "Un ser vivo ha muerto."
+MULTIPLE_ORGANISMS_DIE = "Varios seres vivos han muerto."

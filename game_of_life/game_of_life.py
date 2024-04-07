@@ -2,6 +2,7 @@ import ast
 import random
 
 import utils.messages as msgs
+import utils.prompts as prompts
 from database import models
 from database.database import SessionLocal
 from game_of_life.ecosystem import Ecosystem
@@ -59,7 +60,7 @@ class GameOfLife:
                     # Check probability to create new ecosystem
                     if random.random() < config.NEW_ECOSYSTEM_PROBABILITY:
                         logger.info("Creating new ecosystem...")
-                        msg = msgs.ECOSYSTEM_CREATED + user_first_name
+                        msg = msgs.ECOSYSTEM_CREATED
                         logger.info(msg)
                         new_ecosystem = ecosystem.new_ecosystem(username + str(message))
                         logger.info(new_ecosystem)
@@ -78,9 +79,13 @@ class GameOfLife:
                         # db.commit()
                         db.merge(update_user)
                         # db.commit()
-                        await utils.send_message(msg)
                         await utils.send_message(
-                            ecosystem.format_ecosystem(new_ecosystem)
+                            msg,
+                            pre_prompt=prompts.INSTRUCTION,
+                            prompt=prompts.ECOSYSTEM_BORN,
+                        )
+                        await utils.send_message(
+                            ecosystem.format_ecosystem(msg=new_ecosystem)
                         )
                 else:
                     # logger.info("Evolution...")
@@ -91,7 +96,6 @@ class GameOfLife:
                     probability = messages * config.PROBABILITY_PER_MESSAGE
                     logger.info("Probability: " + str(probability))
                     if random.random() < probability:
-                        # logger.info("Evolution...")
                         logger.info(msgs.EVOLUTION)
                         new_ecosystem, died_by_epidemic = ecosystem.evolution(
                             current_ecosystem, evolutions
@@ -102,9 +106,9 @@ class GameOfLife:
                             for sublist in new_ecosystem
                         )
                         if ecosystem_died:
-                            msg = user_first_name + msgs.ECOSYSTEM_KILLED
+                            msg = msgs.ECOSYSTEM_DIED
                             if died_by_epidemic:
-                                msg += msgs.EPIDEMIC
+                                msg = msgs.EPIDEMIC
                             logger.info(msg)
                             update_user = models.User(
                                 id=user_id,

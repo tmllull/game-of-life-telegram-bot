@@ -36,14 +36,29 @@ class Config:
             self.AZURE_MODEL_NAME = config.get(
                 "AZURE_MODEL_NAME", os.environ.get("AZURE_MODEL_NAME")
             )
-            self.ROWS = 5
-            self.COLUMNS = 5
-            self.PROBABILITY_PER_MESSAGE = 0.1  # 1%
-            self.NEW_ECOSYSTEM_PROBABILITY = 0.2  # 20%
-            self.ECOSYSTEM_PROBABILITY_DIE = 0.02  # 2%
-            self.ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION = 1000  # 0.1%
-            self.ORGANISM_PROBABILITY_DIE = 0.05  # 5%
-            self.ORGANISM_PROBABILITY_DIE_ELD_FRACTION = 1000  # 0.1%
+
+            self.ROWS = config.get("ROWS", os.environ.get("ROWS"))
+            self.COLUMNS = config.get("COLUMNS", os.environ.get("COLUMNS"))
+            self.PROBABILITY_PER_MESSAGE = config.get(
+                "PROBABILITY_PER_MESSAGE", os.environ.get("PROBABILITY_PER_MESSAGE")
+            )
+            self.NEW_ECOSYSTEM_PROBABILITY = config.get(
+                "NEW_ECOSYSTEM_PROBABILITY", os.environ.get("NEW_ECOSYSTEM_PROBABILITY")
+            )
+            self.ECOSYSTEM_PROBABILITY_DIE = config.get(
+                "ECOSYSTEM_PROBABILITY_DIE", os.environ.get("ECOSYSTEM_PROBABILITY_DIE")
+            )
+            self.ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION = config.get(
+                "ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION",
+                os.environ.get("ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION"),
+            )
+            self.ORGANISM_PROBABILITY_DIE = config.get(
+                "ORGANISM_PROBABILITY_DIE", os.environ.get("ORGANISM_PROBABILITY_DIE")
+            )
+            self.ORGANISM_PROBABILITY_DIE_ELD_FRACTION = config.get(
+                "ORGANISM_PROBABILITY_DIE_ELD_FRACTION",
+                os.environ.get("ORGANISM_PROBABILITY_DIE_ELD_FRACTION"),
+            )
 
         except Exception as e:
             exit(e)

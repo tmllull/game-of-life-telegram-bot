@@ -36,28 +36,29 @@ class Config:
             self.AZURE_MODEL_NAME = config.get(
                 "AZURE_MODEL_NAME", os.environ.get("AZURE_MODEL_NAME")
             )
-
-            self.ROWS = config.get("ROWS", os.environ.get("ROWS"))
-            self.COLUMNS = config.get("COLUMNS", os.environ.get("COLUMNS"))
-            self.PROBABILITY_PER_MESSAGE = config.get(
-                "PROBABILITY_PER_MESSAGE", os.environ.get("PROBABILITY_PER_MESSAGE")
+            self.ROWS = int(config.get("ROWS", os.environ.get("ROWS")))
+            self.COLUMNS = int(config.get("COLUMNS", os.environ.get("COLUMNS")))
+            self.PROB_PER_MESSAGE = float(
+                config.get("PROB_PER_MESSAGE", os.environ.get("PROB_PER_MESSAGE"))
             )
-            self.NEW_ECOSYSTEM_PROBABILITY = config.get(
-                "NEW_ECOSYSTEM_PROBABILITY", os.environ.get("NEW_ECOSYSTEM_PROBABILITY")
+            self.NEW_ECO_PROB = float(
+                config.get("NEW_ECO_PROB", os.environ.get("NEW_ECO_PROB"))
             )
-            self.ECOSYSTEM_PROBABILITY_DIE = config.get(
-                "ECOSYSTEM_PROBABILITY_DIE", os.environ.get("ECOSYSTEM_PROBABILITY_DIE")
+            self.ECO_PROB_DIE = float(
+                config.get("ECO_PROB_DIE", os.environ.get("ECO_PROB_DIE"))
             )
-            self.ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION = config.get(
-                "ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION",
-                os.environ.get("ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION"),
+            self.ECO_PROB_ELD_FRACTION = float(
+                config.get(
+                    "ECO_PROB_ELD_FRACTION", os.environ.get("ECO_PROB_ELD_FRACTION")
+                )
             )
-            self.ORGANISM_PROBABILITY_DIE = config.get(
-                "ORGANISM_PROBABILITY_DIE", os.environ.get("ORGANISM_PROBABILITY_DIE")
+            self.ORG_PROB_DIE = float(
+                config.get("ORG_PROB_DIE", os.environ.get("ORG_PROB_DIE"))
             )
-            self.ORGANISM_PROBABILITY_DIE_ELD_FRACTION = config.get(
-                "ORGANISM_PROBABILITY_DIE_ELD_FRACTION",
-                os.environ.get("ORGANISM_PROBABILITY_DIE_ELD_FRACTION"),
+            self.ORG_PROB_ELD_FRACTION = float(
+                config.get(
+                    "ORG_PROB_ELD_FRACTION", os.environ.get("ORG_PROB_ELD_FRACTION")
+                )
             )
 
         except Exception as e:

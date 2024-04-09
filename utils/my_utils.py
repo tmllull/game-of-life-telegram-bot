@@ -48,9 +48,9 @@ class MyUtils:
                 logger.info("Generated text by AI: " + str(msg))
             except Exception as e:
                 logger.info("Error generating text by AI: " + str(e))
-                msg = msg
-        else:
-            logger.info("Sending default message...")
+                # msg = msg
+        # else:
+        #     logger.info("Sending default message...")
 
         async with self.bot:
             msg = self.format_text_for_md2(msg)

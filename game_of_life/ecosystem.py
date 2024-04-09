@@ -60,8 +60,7 @@ class Ecosystem:
         # based on basic probability, and every evolution add 0.1% as the
         #
         probability_to_die = (
-            config.ECOSYSTEM_PROBABILITY_DIE
-            + evolutions / config.ECOSYSTEM_PROBABILITY_DIE_ELD_FRACTION
+            config.ECO_PROB_DIE + evolutions / config.ECO_PROB_ELD_FRACTION
         )
         logger.info("Probability that ecosystem die: " + str(probability_to_die))
         if random.random() < probability_to_die:

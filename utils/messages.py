@@ -1,4 +1,4 @@
-ECOSYSTEM_CREATED = "New ecosystem has been created"
+ECOSYSTEM_CREATED = "New ecosystem is being born..."
 ECOSYSTEM_DIED = "The ecosystem has died"
 # ECOSYSTEM_KILLED = " has killed the ecosystem"
 EVOLUTION = "Ecosystem evolving..."

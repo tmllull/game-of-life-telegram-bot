@@ -59,9 +59,7 @@ class Ecosystem:
         # Probability that ecosystem die by epidemic or something similar,
         # based on basic probability, and every evolution add 0.1% as the
         #
-        probability_to_die = (
-            config.ECO_PROB_DIE + evolutions / config.ECO_PROB_ELD_FRACTION
-        )
+        probability_to_die = config.ECO_PROB_DIE + evolutions * config.ECO_INCREASE_ELD
         logger.info("Probability that ecosystem die: " + str(probability_to_die))
         if random.random() < probability_to_die:
             logger.info("Ecosystem died because of pandemic or something similar")

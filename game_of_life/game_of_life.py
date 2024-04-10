@@ -93,6 +93,7 @@ class GameOfLife:
     ):
         ecosystem_id = ecosystem_alive.id
         messages = ecosystem_alive.messages
+        total_messages = ecosystem_alive.total_messages
         current_ecosystem = ast.literal_eval(ecosystem_alive.ecosystem)
         evolutions = ecosystem_alive.evolutions
         probability = messages * config.PROB_PER_MESSAGE
@@ -112,6 +113,7 @@ class GameOfLife:
                     ecosystem_id,
                     died_by_epidemic,
                     messages,
+                    total_messages,
                     username,
                 )
             else:
@@ -119,11 +121,13 @@ class GameOfLife:
                     user_id,
                     user_db,
                     ecosystem_id,
+                    total_messages,
                     new_ecosystem,
                     evolutions,
                 )
         else:
             ecosystem_alive.messages += 1
+            ecosystem_alive.total_messages += 1
             db.merge(ecosystem_alive)
 
     async def create_new_ecosystem(self, user_id, user_db, username: str, message: str):
@@ -135,6 +139,7 @@ class GameOfLife:
         ecosystem_to_add = models.Ecosystem(
             ecosystem=str(new_ecosystem),
             messages=0,
+            total_messages=0,
             evolutions=0,
             born_date=utils.get_date(),
             creator=username,
@@ -155,7 +160,14 @@ class GameOfLife:
         await utils.send_message(ecosystem.format_ecosystem(new_ecosystem))
 
     async def kill_ecosystem(
-        self, user_id, user_db, ecosystem_id, died_by_epidemic, messages, username
+        self,
+        user_id,
+        user_db,
+        ecosystem_id,
+        died_by_epidemic,
+        messages,
+        total_messages,
+        username,
     ):
         prompt = prompts.ECOSYSTEM_DIE
         if died_by_epidemic:
@@ -171,6 +183,7 @@ class GameOfLife:
         died_ecosystem = models.Ecosystem(
             id=ecosystem_id,
             messages=messages + 1,
+            total_messages=total_messages + 1,
             extinction_date=utils.get_date(),
             killer=username,
         )
@@ -186,7 +199,7 @@ class GameOfLife:
         await utils.send_message(ecosystem.format_ecosystem(ecosystem.died_ecosystem()))
 
     async def evolution(
-        self, user_id, user_db, ecosystem_id, new_ecosystem, evolutions
+        self, user_id, user_db, ecosystem_id, total_messages, new_ecosystem, evolutions
     ):
         msg = msgs.EVOLUTION
         logger.info(msg)
@@ -195,6 +208,7 @@ class GameOfLife:
             id=ecosystem_id,
             ecosystem=str(new_ecosystem),
             messages=0,
+            total_messages=total_messages + 1,
             evolutions=evolutions,
         )
         update_user = models.User(

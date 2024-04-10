@@ -47,18 +47,14 @@ class Config:
             self.ECO_PROB_DIE = float(
                 config.get("ECO_PROB_DIE", os.environ.get("ECO_PROB_DIE"))
             )
-            self.ECO_PROB_ELD_FRACTION = float(
-                config.get(
-                    "ECO_PROB_ELD_FRACTION", os.environ.get("ECO_PROB_ELD_FRACTION")
-                )
+            self.ECO_INCREASE_ELD = float(
+                config.get("ECO_INCREASE_ELD", os.environ.get("ECO_INCREASE_ELD"))
             )
             self.ORG_PROB_DIE = float(
                 config.get("ORG_PROB_DIE", os.environ.get("ORG_PROB_DIE"))
             )
-            self.ORG_PROB_ELD_FRACTION = float(
-                config.get(
-                    "ORG_PROB_ELD_FRACTION", os.environ.get("ORG_PROB_ELD_FRACTION")
-                )
+            self.ORG_INCREASE_ELD = float(
+                config.get("ORG_INCREASE_ELD", os.environ.get("ORG_INCREASE_ELD"))
             )
 
         except Exception as e:

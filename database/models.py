@@ -21,6 +21,7 @@ class Ecosystem(Base):
     ecosystem = Column(String(255))
     evolutions = Column(Integer)
     messages = Column(Integer)
+    total_messages = Column(Integer)
     born_date = Column(Date)
     extinction_date = Column(Date)
     creator = Column(String(255))

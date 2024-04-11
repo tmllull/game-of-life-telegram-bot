@@ -18,10 +18,16 @@ class Organisms:
         current_probability_to_die = config.ORG_PROB_DIE * evolutions
         # Check if organisms is devored by neighbors
         if self.is_devoured(organism, neighbors):
-            logger.info("Organism " + organism + " devoured")
+            logger.info("Organism " + organism + " devoured by " + str(neighbors))
             return " "
         if random.random() < current_probability_to_die:
-            logger.info("Organism " + organism + " died accidentally")
+            logger.info(
+                "Organism "
+                + organism
+                + " died accidentally ("
+                + str(current_probability_to_die)
+                + ")"
+            )
             return " "
         return organism
 

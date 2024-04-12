@@ -20,6 +20,8 @@ NOTE: all the probabilities can be set on .env file.
 ### New ecosystem
 If there are no ecosystem alive, the probability of a new ecosystem being born is 20% by default. This offers some uncertainty in not knowing when a new ecosystem will be created.
 
+By default, the size is 5x5, and up to 3 organisms of every group (Flora and Fauna) can be born.
+
 ### Evolution
 When there is a living ecosystem, the probability of new evolution depends on the number of the messages received after new ecosystem born. By default, every message increase 1% this probability, so, at least every 100 messages the ecosystem will evolve.
 

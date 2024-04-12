@@ -29,15 +29,15 @@ class Ecosystem:
         fauna_list = fauna.get_organisms()
         ecosystem = [[" " for _ in range(columns)] for _ in range(rows)]
 
-        # Puts up to three flora organisms
-        for _ in range(3):
+        # Puts up to INITIAL_FLORA organisms
+        for _ in range(config.INITIAL_FLORA):
             x = random.randint(0, rows - 1)
             y = random.randint(0, columns - 1)
             organism = random.choice(flora_list)
             ecosystem[x][y] = organism
 
-        # Puts up to three fauna organisms
-        for _ in range(3):
+        # Puts up to INITIAL_FAUNA organisms
+        for _ in range(config.INITIAL_FAUNA):
             x = random.randint(0, rows - 1)
             y = random.randint(0, columns - 1)
             organism = random.choice(fauna_list)

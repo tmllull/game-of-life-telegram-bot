@@ -38,6 +38,12 @@ class Config:
             )
             self.ROWS = int(config.get("ROWS", os.environ.get("ROWS")))
             self.COLUMNS = int(config.get("COLUMNS", os.environ.get("COLUMNS")))
+            self.INITIAL_FLORA = int(
+                config.get("INITIAL_FLORA", os.environ.get("INITIAL_FLORA"))
+            )
+            self.INITIAL_FAUNA = int(
+                config.get("INITIAL_FAUNA", os.environ.get("INITIAL_FAUNA"))
+            )
             self.PROB_PER_MESSAGE = float(
                 config.get("PROB_PER_MESSAGE", os.environ.get("PROB_PER_MESSAGE"))
             )

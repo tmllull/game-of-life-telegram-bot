@@ -54,7 +54,7 @@ class GameOfLife:
             message.from_user.id,
             message.from_user.first_name,
             message.from_user.username,
-            message.text,
+            message,
         )
 
     def get_user_from_db(self, user_id):

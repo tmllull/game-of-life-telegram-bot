@@ -62,7 +62,7 @@ The data for all the ecosystem management is stored in SQLite. There are, for no
 - Users: 
   - ID: Telegram user ID
   - Ecosystems created: number of ecosystems born thanks to a message from him/her
-  - Ecisystems evolved: number of ecosystems evolved thanks to a message from him/her
+  - Ecosystems evolved: number of ecosystems evolved thanks to a message from him/her
   - Ecosystems killed: number of ecosystems died thanks to a message from him/her
 
 - Ecosystems: 

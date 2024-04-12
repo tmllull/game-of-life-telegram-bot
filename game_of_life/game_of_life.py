@@ -24,7 +24,7 @@ class GameOfLife:
         logger.info("Starting game of life...")
 
     async def check_evolution(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        if not utils.check_valid_chat(update):
+        if not await utils.check_valid_chat(update):
             logger.info("Invalid chat")
             return
 

@@ -29,7 +29,7 @@ When a new evolution occurs, there are again some actions:
 - Every evolution can increase this probability, in order to add some "oldness" or "degradation". By default, every evolution increases 0,1%.
 
 #### Organisms
-When en ecosystem evolve, the basic algorithm for "Game of Life" starts, but with some additions.
+When an ecosystem evolve, the basic algorithm for "Game of Life" starts, but with some additions.
 
 In this implementation, there are not only "organisms" in general; there are 2 main groups: Flora and Fauna. And there are a "free" interpretations about the "Trophic levels". In addition, every level has a "survival" value (1 to 4), that represents the probability to survive in the entire ecosystem. For example, a flower is more fragile than a wolf.
 
@@ -45,14 +45,14 @@ _Level1_: basically insects like bees, flies, ants, bugs... The survival level i
 
 _Level2_: small animals like rabbits, squirrels, small birds, goats... These animals are generally herbivorous. The survival level is 2.
 
-_Level3_: bigger animals, like pigs, cows, monkeys, giraffes, elephants... These animals are generally omnivores, but not as dangerous as predators. The survival level is 3.
+_Level3_: bigger animals, like pigs, cows, monkeys, giraffes, elephants... These animals are generally herbivorous or omnivores, but not as dangerous as predators. The survival level is 3.
 
 _Level4_: basically, big predators and mostly carnivores, like lions, tigers, sneaks, wolfs... The survival level is 4.
 
 With this, when the basic algorithm determine that an organism keep alive, the following actions starts:
 - The neighbors are relevant. In resume, if neighbors are more dangerous than the organism, the organism can be devoured.
 - If the organism is not devoured, there is a default probability of 5% that the organism die suddenly (ill, accident...). This value can be modified with every evolution (by default, increases 0.1%).
-- If the organism is not devoured or die suddenly, keep alive.
+- If the organism is not devoured or die suddenly, stays alive.
 
 ## GenAI integration
 GenAI? What can the GenAI do in an simple algorithm to create end destroy ecosystems?
@@ -61,7 +61,7 @@ By default, when some events occurs, a message is sent to the group. For example
 
 Well, the idea here is to generate this messages using GenAI. For example, instead of "New ecosystem is being born...", is more interesting "In a newly planted forest, animals and plants begin to adapt and relate, forming a new ecosystem."
 
-This feature is in beta, so, you know, and for now, there are options to user OpenAI or AzureOpenAI services.
+This feature is in beta, so, you know. And for now, there are options to user OpenAI or AzureOpenAI services.
 
 The prompts and pre-prompts are defined on `utils/prompts`
 

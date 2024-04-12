@@ -5,7 +5,7 @@ Another useless Telegram Bot.
 This project is an implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using a Telegram bot. The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.
 
 ## How it works
-TL;DR
+TL;DR;
 
 Every message sent to the group can start the process to create a new ecosystem or evolve the current ecosystem. The ecosystem can die because of the normal algorithm or custom variations. An organism can die because of the normal algorithm or custom variations. Every new ecosystem, evolution or die (of the entire ecosystem, not organism) will be notified to the group. End.
 

@@ -61,7 +61,9 @@ By default, when some events occurs, a message is sent to the group. For example
 
 Well, the idea here is to generate this messages using GenAI. For example, instead of "New ecosystem is being born...", is more interesting "In a newly planted forest, animals and plants begin to adapt and relate, forming a new ecosystem."
 
-This feature is in beta, so, you know. And for now, there are options to user OpenAI or AzureOpenAI services.
+This feature is in beta, so, you know, and for now, there are options to user OpenAI or AzureOpenAI services.
+
+The prompts and pre-prompts are defined on `utils/prompts`
 
 ## How to use
 The recommended use is using Docker:

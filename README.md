@@ -52,7 +52,11 @@ _Level3_: bigger animals, like pigs, cows, monkeys, giraffes, elephants... These
 _Level4_: basically, big predators and mostly carnivores, like lions, tigers, sneaks, wolfs... The survival level is 4.
 
 With this, when the basic algorithm determine that an organism keep alive, the following actions starts:
-- The neighbors are relevant. In resume, if neighbors are more dangerous than the organism, the organism can be devoured.
+- The neighbors are relevant. In resume, if neighbors are more dangerous than the organism, the organism can be devoured, and the probabilities to survive are as follow (home made calculations):
+
+  - Calculate the average "survival_value" for all the neighbors, but take in account only those values equal or higher than the organism. For example, if there are 3 neighbors with values 1, 3 and 4, and the "survival_value" for the organism is 2, only 3 and 4 will be used, but this value will be divided by 3 (the other organisms can be devoured instead of you).
+  - Then, calculate the percentage between the organism and this average. In this example, 2 vs 2,3 ~ 0,86. So, the organisms has about 86% to survive (or about 14% to be devoured).
+
 - If the organism is not devoured, there is a default probability of 5% that the organism die suddenly (ill, accident...). This value can be modified with every evolution (by default, increases 0.1%).
 - If the organism is not devoured or die suddenly, stays alive.
 

@@ -59,18 +59,26 @@ class Organisms:
         for neighbor in neighbors:
             if organism_survival <= self.get_survival(neighbor):
                 neighbors_survival += self.get_survival(neighbor)
-        # logger.info(
-        #     organism
-        #     + " ("
-        #     + str(organism_survival * len(neighbors))
-        #     + ")"
-        #     + " vs "
-        #     + str(neighbors)
-        #     + " ("
-        #     + str(neighbors_survival)
-        #     + ")"
-        # )
-        if organism_survival * len(neighbors) < neighbors_survival:
+        if neighbors_survival != 0:
+            neighbors_survival = neighbors_survival / len(neighbors)
+            survival_probability = (
+                (organism_survival * 100) / neighbors_survival
+            ) / 100
+        else:
+            survival_probability = 1
+        logger.info(
+            organism
+            + " ("
+            + str(organism_survival * len(neighbors))
+            + ")"
+            + " vs "
+            + str(neighbors)
+            + " ("
+            + str(neighbors_survival)
+            + ") => "
+            + str(survival_probability)
+        )
+        if random.random() > survival_probability:
             return True
         return False
 

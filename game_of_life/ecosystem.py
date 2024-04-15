@@ -91,7 +91,7 @@ class Ecosystem:
                         logger.info(
                             "Organism "
                             + ecosystem[i][j]
-                            + " died because of superpopulation or infrapopulation"
+                            + " died because of overpopulation or underpopulation"
                         )
                         new_generation[i][j] = " "  # Die
                     else:

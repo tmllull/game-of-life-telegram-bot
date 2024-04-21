@@ -1,9 +1,9 @@
 import logging
 import sys
 
-from database.database import SessionLocal
+# from src.database.database import SessionLocal
 
-db = SessionLocal()
+# db = SessionLocal()
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO

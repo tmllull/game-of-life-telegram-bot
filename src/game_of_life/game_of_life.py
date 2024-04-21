@@ -1,17 +1,17 @@
 import ast
 import random
 
-import utils.messages as msgs
-import utils.prompts as prompts
-from database import models
-from database.database import SessionLocal
-from game_of_life.ecosystem import Ecosystem
+import src.utils.messages as msgs
+import src.utils.prompts as prompts
 from sqlalchemy import func
+from src.database import models
+from src.database.database import SessionLocal
+from src.game_of_life.ecosystem import Ecosystem
+from src.utils import logger as logger
+from src.utils.config import Config
+from src.utils.my_utils import MyUtils
 from telegram import Update
 from telegram.ext import ContextTypes
-from utils import logger as logger
-from utils.config import Config
-from utils.my_utils import MyUtils
 
 utils = MyUtils()
 config = Config()
@@ -24,8 +24,10 @@ class GameOfLife:
         logger.info("Starting game of life...")
 
     async def check_evolution(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        if not await utils.check_valid_chat(update):
+        if not utils.check_valid_chat(update):
             logger.info("Invalid chat")
+            chat_id = update.message.chat_id
+            await utils.leave_chat(chat_id, random.choice(utils.leaving_gifs))
             return
 
         try:

@@ -1,7 +1,7 @@
 import random
 
-import utils.logger as logger
-from utils.config import Config
+import src.utils.logger as logger
+from src.utils.config import Config
 
 config = Config()
 

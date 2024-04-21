@@ -1,8 +1,8 @@
 import random
 
-import utils.logger as logger
-from game_of_life.organisms import Organisms
-from utils.config import Config
+import src.utils.logger as logger
+from src.game_of_life.organisms import Organisms
+from src.utils.config import Config
 
 organisms = Organisms()
 flora = organisms.Flora()

@@ -1,8 +1,8 @@
 import tiktoken
-from clients.azure_openai import AzureOAI
-from clients.openai import OpenAI
-from utils import logger as logger
-from utils.config import Config
+from src.clients.azure_openai import AzureOAI
+from src.clients.openai import OpenAI
+from src.utils import logger as logger
+from src.utils.config import Config
 
 open_ai = OpenAI()
 azure_openai = AzureOAI()

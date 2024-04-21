@@ -1,8 +1,8 @@
 import json
 
-import utils.logger as logger
+import src.utils.logger as logger
 from openai import OpenAI
-from utils.config import Config
+from src.utils.config import Config
 
 # from utils.my_utils import MyUtils
 

@@ -1,8 +1,8 @@
-from database import models
-from database.database import engine
-from game_of_life.game_of_life import GameOfLife
+from src.database import models
+from src.database.database import engine
+from src.game_of_life.game_of_life import GameOfLife
+from src.utils.config import Config
 from telegram.ext import Application, ApplicationBuilder, MessageHandler
-from utils.config import Config
 
 gol = GameOfLife()
 

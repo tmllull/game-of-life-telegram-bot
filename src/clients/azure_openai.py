@@ -1,9 +1,9 @@
 import json
 import os
 
-import utils.logger as logger
+import src.utils.logger as logger
 from openai import AzureOpenAI
-from utils.config import Config
+from src.utils.config import Config
 
 config = Config()
 

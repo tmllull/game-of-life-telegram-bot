@@ -2,31 +2,37 @@ import datetime
 import os
 import random
 
+import src.utils.logger as logger
 import telegram
-import utils.logger as logger
-from clients.ai_controller import AIController
-from database.database import SessionLocal
+from src.clients.ai_controller import AIController
+from src.database.database import SessionLocal
+from src.utils.config import Config
 from telegram import Bot, Update
-from utils.config import Config
 
 config = Config()
 ai_controller = AIController()
-db = SessionLocal()
+# db = SessionLocal()
 
-leaving_gifs = [
-    "CgACAgQAAx0CboIgbAACDO9mGWRx5aGU3t41YI9Yq09Bpr4VUgAC9wIAAlx1hVOKzWaxi1UfPjQE",
-    "CgACAgQAAx0CboIgbAACDPJmGWWyJoHT8j3LujDLI1yGGqKtrQAC9QIAAuIXBFOxPQS1SLBLHDQE",
-    "CgACAgQAAx0CboIgbAACDPNmGWXLAzWDlvIjK4RguK-0RMWBeQACIAMAAjG9JFOis1aOwCU45TQE",
-    "CgACAgQAAx0CboIgbAACDPZmGWXqPTo5LhYS8cv2NHGhxWH8LwACMAMAAnxsFFPbZIBe-cVFwTQE",
-]
+# leaving_gifs = [
+#     "CgACAgQAAx0CboIgbAACDO9mGWRx5aGU3t41YI9Yq09Bpr4VUgAC9wIAAlx1hVOKzWaxi1UfPjQE",
+#     "CgACAgQAAx0CboIgbAACDPJmGWWyJoHT8j3LujDLI1yGGqKtrQAC9QIAAuIXBFOxPQS1SLBLHDQE",
+#     "CgACAgQAAx0CboIgbAACDPNmGWXLAzWDlvIjK4RguK-0RMWBeQACIAMAAjG9JFOis1aOwCU45TQE",
+#     "CgACAgQAAx0CboIgbAACDPZmGWXqPTo5LhYS8cv2NHGhxWH8LwACMAMAAnxsFFPbZIBe-cVFwTQE",
+# ]
 
 
 class MyUtils:
     """_summary_"""
 
-    def __init__(self):
-        pass
+    def __init__(self, db: SessionLocal = None):
+        self.db = db
         self.bot = Bot(config.TELEGRAM_TOKEN)
+        self.leaving_gifs = [
+            "CgACAgQAAx0CboIgbAACDO9mGWRx5aGU3t41YI9Yq09Bpr4VUgAC9wIAAlx1hVOKzWaxi1UfPjQE",
+            "CgACAgQAAx0CboIgbAACDPJmGWWyJoHT8j3LujDLI1yGGqKtrQAC9QIAAuIXBFOxPQS1SLBLHDQE",
+            "CgACAgQAAx0CboIgbAACDPNmGWXLAzWDlvIjK4RguK-0RMWBeQACIAMAAjG9JFOis1aOwCU45TQE",
+            "CgACAgQAAx0CboIgbAACDPZmGWXqPTo5LhYS8cv2NHGhxWH8LwACMAMAAnxsFFPbZIBe-cVFwTQE",
+        ]
         # if config.AI_SERVICE == "openai":
         #     self._ai_service = open_ai
         # elif config.AI_SERVICE == "azure":
@@ -35,7 +41,7 @@ class MyUtils:
         #     self._ai_service = None
         # self.chat_id = self.TELEGRAM_CHAT_ID
 
-    async def check_valid_chat(self, update: Update) -> bool:
+    def check_valid_chat(self, update: Update) -> bool:
         try:
             # logger.info(update.message)
             username = update.message.from_user.username
@@ -43,7 +49,7 @@ class MyUtils:
             chat_id = update.message.chat_id
             if chat_id < 0:
                 if chat_id != int(config.TELEGRAM_CHAT_ID):
-                    await self.leave_chat(chat_id, random.choice(leaving_gifs))
+                    # await self.leave_chat(chat_id, random.choice(leaving_gifs))
                     return False
                 return True
             return False

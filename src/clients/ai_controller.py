@@ -1,11 +1,12 @@
 import tiktoken
-from src.clients.azure_openai import AzureOAI
-from src.clients.openai import OpenAI
+from openai import AzureOpenAI, OpenAI
+
+# from src.clients.azure_openai import AzureOAI
+# from src.clients.openai import OpenAI
 from src.utils import logger as logger
+from src.utils import prompts as prompts
 from src.utils.config import Config
 
-open_ai = OpenAI()
-azure_openai = AzureOAI()
 config = Config()
 
 
@@ -17,19 +18,43 @@ class AIController:
             logger.info("AI_SERVICE is not set")
             self.has_service = False
         else:
-            logger.info("AI_SERVICE is set")
             self.has_service = True
+            if config.AI_SERVICE == "openai":
+                logger.info("AI_SERVICE is set to OpenAI")
+                self._client = OpenAI(api_key=config.OPENAI_API_KEY)
+                self._MODEL = config.OPENAI_MODEL
+            elif config.AI_SERVICE == "azure":
+                logger.info("AI_SERVICE is set to Azure OpenAI")
+                self._client = AzureOpenAI(
+                    api_key=config.AZURE_API_KEY,
+                    api_version=config.AZURE_API_VERSION,
+                    azure_endpoint=config.AZURE_API_ENDPOINT,
+                )
+                self._MODEL = config.AZURE_MODEL_NAME
 
-    async def generate_text(self, pre_prompt, prompt) -> str:
-        if config.AI_SERVICE == "openai":
-            logger.info("Generating text using OpenAI...")
-            return open_ai.generate_text(pre_prompt, prompt)
-        elif config.AI_SERVICE == "azure":
-            logger.info("Generating text using Azure OpenAI...")
-            return azure_openai.generate_text(pre_prompt, prompt)
-        else:
-            logger.info("AI_SERVICE is not set")
-            logger.info(config.AI_SERVICE)
+    async def generate_text(self, prompt) -> str:
+        messages = [
+            {
+                "role": "system",
+                "content": prompts.INSTRUCTION,
+            },
+            {"role": "user", "content": prompt},
+        ]
+        response = self._client.chat.completions.create(
+            model=self._MODEL,
+            messages=messages,
+        )
+        logger.info(response.usage.total_tokens)
+        return response.choices[0].message.content
+        # if config.AI_SERVICE == "openai":
+        #     logger.info("Generating text using OpenAI...")
+        #     return open_ai.generate_text(pre_prompt, prompt)
+        # elif config.AI_SERVICE == "azure":
+        #     logger.info("Generating text using Azure OpenAI...")
+        #     return azure_openai.generate_text(pre_prompt, prompt)
+        # else:
+        #     logger.info("AI_SERVICE is not set")
+        #     logger.info(config.AI_SERVICE)
 
     def num_tokens_from_messages(self, messages, model):
         """Return the number of tokens used by a list of messages."""

@@ -156,7 +156,6 @@ class GameOfLife:
         # db.commit()
         await utils.send_message(
             msg,
-            pre_prompt=prompts.INSTRUCTION,
             prompt=prompts.ECOSYSTEM_BORN,
         )
         await utils.send_message(ecosystem.format_ecosystem(new_ecosystem))
@@ -195,7 +194,6 @@ class GameOfLife:
         # db.commit()
         await utils.send_message(
             msg,
-            pre_prompt=prompts.INSTRUCTION,
             prompt=prompt,
         )
         await utils.send_message(ecosystem.format_ecosystem(ecosystem.died_ecosystem()))
@@ -223,7 +221,6 @@ class GameOfLife:
         # db.commit()
         await utils.send_message(
             msg,
-            pre_prompt=prompts.INSTRUCTION,
             prompt=prompts.ECOSYSTEM_EVOLUTION,
         )
         await utils.send_message(ecosystem.format_ecosystem(new_ecosystem))

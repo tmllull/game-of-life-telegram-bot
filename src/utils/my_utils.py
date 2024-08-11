@@ -65,11 +65,11 @@ class MyUtils:
             await self.bot.leave_chat(chat_id=chat_id)
         # return
 
-    async def send_message(self, msg=None, pre_prompt=None, prompt=None):
-        if pre_prompt and prompt is not None and ai_controller.has_service:
+    async def send_message(self, msg=None, prompt=None):
+        if prompt is not None and ai_controller.has_service:
             try:
                 logger.info("Generating text by AI...")
-                msg = await ai_controller.generate_text(pre_prompt, prompt)
+                msg = await ai_controller.generate_text(prompt)
                 logger.info("Generated text by AI: " + str(msg))
             except Exception as e:
                 logger.info("Error generating text by AI: " + str(e))

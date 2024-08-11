@@ -6,6 +6,8 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(255))
+    username = Column(String(255))
     ecosystems_created = Column(Integer)
     ecosystems_killed = Column(Integer)
     ecosystems_evolved = Column(Integer)

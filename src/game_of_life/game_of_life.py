@@ -34,7 +34,7 @@ class GameOfLife:
             user_id, user_first_name, username, message = self.extract_user_info(
                 update.message
             )
-            user_db = self.get_user_from_db(user_id)
+            user_db = self.get_user_from_db(user_id, user_first_name, username)
             ecosystems_db = self.get_ecosystems_count()
             ecosystem_alive = self.get_alive_ecosystem()
 
@@ -59,11 +59,13 @@ class GameOfLife:
             message,
         )
 
-    def get_user_from_db(self, user_id):
+    def get_user_from_db(self, user_id, user_first_name, username):
         user_db = db.query(models.User).filter(models.User.id == user_id).first()
         if not user_db:
             new_user = models.User(
                 id=user_id,
+                name=user_first_name,
+                username=username,
                 ecosystems_created=0,
                 ecosystems_killed=0,
                 ecosystems_evolved=0,

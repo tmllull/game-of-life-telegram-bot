@@ -1,9 +1,9 @@
 import logging
 import sys
 
-from database.database import SessionLocal
+# from src.database.database import SessionLocal
 
-db = SessionLocal()
+# db = SessionLocal()
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
@@ -17,7 +17,7 @@ if not logger.handlers:
     stdout_handler.setLevel(logging.DEBUG)
     stdout_handler.setFormatter(formatter)
 
-    file_handler = logging.FileHandler("logs.log")
+    file_handler = logging.FileHandler("logs.log", encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
 
@@ -26,6 +26,7 @@ if not logger.handlers:
 
 
 def info(msg):
+    # print(msg)
     logger.info(msg)
 
 

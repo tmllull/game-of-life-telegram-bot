@@ -1,8 +1,8 @@
 import random
 
-import utils.logger as logger
-from game_of_life.organisms import Organisms
-from utils.config import Config
+import src.utils.logger as logger
+from src.game_of_life.organisms import Organisms
+from src.utils.config import Config
 
 organisms = Organisms()
 flora = organisms.Flora()
@@ -67,7 +67,7 @@ class Ecosystem:
         if random.random() < probability_to_die:
             logger.info("Ecosystem died because of pandemic or something similar")
             return new_generation, True
-
+        logger.info("Ecosystem still alive...")
         for i in range(rows):  # Ecosystem evolution
             for j in range(columns):
                 # Count the number of neighbors that are alive
@@ -95,6 +95,7 @@ class Ecosystem:
                         )
                         new_generation[i][j] = " "  # Die
                     else:
+                        logger.info("Organism " + ecosystem[i][j] + " still alive...")
                         new_generation[i][j] = organisms.evolution(
                             ecosystem[i][j], evolutions, neighbors
                         )  # Stay (if not die on evolution)

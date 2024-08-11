@@ -28,6 +28,5 @@ sonarcloud-check:
   script:
     - sonar-scanner
   only:
-    - merge_requests
     - main
     - develop

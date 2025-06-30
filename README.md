@@ -1,6 +1,8 @@
 # Telegram Game of Life Bot
 Another useless Telegram Bot.
 
+IMPORTANT NOTE: This projects has been evolved (Yay!) and now there are an API project to integrate the process into other tolls/applications: [Game of Life API](https://gitlab.com/tmllull/game-of-life-api)
+
 ## About
 This project is an implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using a Telegram bot. The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.
 
